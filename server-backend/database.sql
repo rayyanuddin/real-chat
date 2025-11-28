@@ -1,0 +1,30 @@
+show databases;
+create database chatapp;
+use  chatapp;
+
+CREATE TABLE IF NOT EXISTS users (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  email VARCHAR(255) NOT NULL,
+  password VARCHAR(255) NOT NULL
+);
+CREATE TABLE IF NOT EXISTS messages (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  senderId INT NOT NULL,
+  receiverId INT NOT NULL,
+  message TEXT NOT NULL,
+  createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  
+  FOREIGN KEY (senderId) REFERENCES users(id) ON DELETE CASCADE,
+  FOREIGN KEY (receiverId) REFERENCES users(id) ON DELETE CASCADE
+);
+
+SET SQL_SAFE_UPDATES = 0;
+
+DELETE t1 FROM users t1
+INNER JOIN users t2 
+WHERE t1.id > t2.id AND t1.email = t2.email;
+
+SET SQL_SAFE_UPDATES = 1; 
+ALTER TABLE users ADD COLUMN name VARCHAR(100) AFTER id;
+ALTER TABLE messages ADD COLUMN isDeleted BOOLEAN DEFAULT 0;
+
