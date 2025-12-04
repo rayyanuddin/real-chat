@@ -7,7 +7,7 @@ const Register = ({ setIsRegister }) => {
   const handleRegister = async () => {
     if (!form.name || !form.email || !form.password) return alert("All fields required");
     try {
-      await axios.post("http://localhost:5000/api/users/register", form);
+      await axios.post("http://192.168.1.78:5000/api/users/register", form);
       alert("Registered! Please login.");
       setIsRegister(false);
     } catch (err) {

@@ -7,7 +7,7 @@ const Chat = ({ setCurrentUser }) => {
   const [selectedUser, setSelectedUser] = useState(null);
   const [mobileChatOpen, setMobileChatOpen] = useState(false);
 
-  const [socket] = useState(() => io("http://localhost:5000"));
+  const [socket] = useState(() => io("http://192.168.1.78:5000"));
   const currentUser = JSON.parse(localStorage.getItem("user"));
 
   useEffect(() => {
